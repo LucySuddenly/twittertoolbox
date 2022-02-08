@@ -17,7 +17,7 @@ TWITTER:
   BEARER_TOKEN:
 ```
 
-`echo "[]" > db/log.json` to set up the temporary request log for dev (see [my hacky utilty class](lib/json_logs.rb))
+`echo "[]" > db/log.json` to set up the temporary request log for dev (see [my hacky utilty class](app/lib/json_logs.rb))
 
 `rails s` like ya do
 
