@@ -11,6 +11,9 @@ class TwitterClient
     end
   end
 
+  # lol I don't want to reimplement anything
+  # but eventually I'll probably replace the twitter gem so 
+  # why get verbose during prototyping? 😌
   def method_missing(m, *args, &block)
     client.send(m, *args, &block)
   end

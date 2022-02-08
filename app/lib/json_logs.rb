@@ -5,7 +5,7 @@ class JsonLogs
     existing_data = JSON.parse File.read('db/log.json')
 
     File.open("db/log.json","w") do |f|
-      f.puts JSON.pretty_generate(existing_data << data.to_json)
+      f.puts JSON.pretty_generate(existing_data << data)
     end 
   end
 end

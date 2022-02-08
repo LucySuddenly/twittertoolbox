@@ -1,9 +1,9 @@
 class ToolsController < ApplicationController
-  def user
-    user = TwitterClient.instance.user(params[:user])
+  after_action :json_log
 
-    JsonLogs.write(user)
-    render json: user
+  def user
+    @response = TwitterClient.instance.user(params[:user]).to_h
+    render json: @response
   end
 
   def followers
@@ -20,8 +20,8 @@ class ToolsController < ApplicationController
     response = TwitterClient.instance.followers(user, options).to_h
 
     if response[:next_cursor].nil? 
-      JsonLogs.write(response)
-      return render json: response[:users]
+      @response = response[:users]
+      return render json: @response
     end
 
     collection = Array.new(response[:users])
@@ -34,17 +34,23 @@ class ToolsController < ApplicationController
 
       response = TwitterClient.instance.followers(user, options).to_h
       collection.concat(response[:users])
+      
       requests_made += 1
     end
 
-    JsonLogs.instance.write(collection)
-    render json: collection
+    @response = collection
+    render json: @response
   end
 
   def favorites
-    favorites = TwitterClient.instance.favorites(params[:user])
+    @response = TwitterClient.instance.favorites(params[:user]).to_h
 
-    JsonLogs.write(favorites)
-    render json: favorites
+    render json: @response
+  end
+
+  private
+
+  def json_log
+    JsonLogs.write(@response)
   end
 end
