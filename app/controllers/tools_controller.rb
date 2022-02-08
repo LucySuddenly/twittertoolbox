@@ -3,7 +3,6 @@ class ToolsController < ApplicationController
         user = TwitterClient.instance.user(params[:user])
 
         JsonLogs.write(user)
-
         render json: user
     end
 
@@ -19,9 +18,9 @@ class ToolsController < ApplicationController
 
         # https://developer.twitter.com/en/docs/twitter-api/v1/accounts-and-users/follow-search-get-users/api-reference/get-followers-list
         response = TwitterClient.instance.followers(user, options).to_h
-        JsonLogs.write(response)
 
         if response[:next_cursor].nil? 
+            JsonLogs.write(response)
             return render json: response[:users]
         end
 
@@ -35,10 +34,10 @@ class ToolsController < ApplicationController
 
             response = TwitterClient.instance.followers(user, options).to_h
             collection.concat(response[:users])
-            JsonLogs.instance.write(response)
             requests_made += 1
         end
 
+        JsonLogs.instance.write(collection)
         render json: collection
     end
 
@@ -46,7 +45,6 @@ class ToolsController < ApplicationController
         favorites = TwitterClient.instance.favorites(params[:user])
 
         JsonLogs.write(favorites)
-
         render json: favorites
     end
 end
