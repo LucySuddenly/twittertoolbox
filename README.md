@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+WARNING: deeply experimental and unfinished
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+`bundle install`
 
-* System dependencies
+`EDITOR=vim rails credentials:edit` to open the Rails encrypted credentials file
 
-* Configuration
+Add your twitter creds with the below structure:
 
-* Database creation
+```
+TWITTER:
+  API_KEY:
+  API_KEY_SECRET:
+  BEARER_TOKEN:
+```
 
-* Database initialization
+`rails s` like ya do
 
-* How to run the test suite
+## Endpoints
 
-* Services (job queues, cache servers, search engines, etc.)
+To be documented when namespacing is better solidified. Until then, check `routes.rb`
 
-* Deployment instructions
+## License
 
-* ...
+Licensed under [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
