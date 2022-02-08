@@ -1,6 +1,4 @@
 class ToolsController < ApplicationController
-  after_action :json_log
-
   def user
     @response = TwitterClient.instance.user(params[:user]).to_h
     render json: @response
@@ -46,11 +44,5 @@ class ToolsController < ApplicationController
     @response = TwitterClient.instance.favorites(params[:user]).to_h
 
     render json: @response
-  end
-
-  private
-
-  def json_log
-    JsonLogs.write(@response)
   end
 end
