@@ -12,6 +12,8 @@ class ToolsController < ApplicationController
         include_user_entities: false
       }
 
+    # ~30 sec response time for ~2500 followers
+    # awful. filthy. must fix.
     @response = TwitterClient.instance.get_resource_with_cursor(:followers, user, options, 15)
     render json: @response
   end
