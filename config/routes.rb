@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :tools
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
+  get '/tools/followers/:user', to: 'tools#followers'
+  get '/tools/user/:user', to: 'tools#user'
+  get 'tools/favorites/:user', to: 'tools#favorites'
 end
